@@ -1,3 +1,4 @@
-export const createShip = (length, hits, isSunk) => {
-    return { length, hits, isSunk}
+export const createShip = (length) => {
+    const isSunk = 1;
+    return { length, isSunk}
 }
