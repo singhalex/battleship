@@ -5,4 +5,7 @@ test('Create a ship object with a length property of 5', () => {
     expect(fiveShip.length).toBe(5);
 });
 
-test('')
+test('Create a ship object with 2 hits', () => {
+    const twoHitShip = createShip(0, 2, false);
+    expect(twoHitShip.hits).toBe(2);
+});
