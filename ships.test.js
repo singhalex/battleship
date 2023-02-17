@@ -21,3 +21,16 @@ test('Add 2 hits to ship and expect number of hits to be 2', () => {
     hitTheShip.hit();
     expect(hitTheShip.getHits()).toBe(2);
 })
+
+test('Add 2 hits to a 2 length ship and it will be sunk', () => {
+    const sinkShip = createShip(2);
+    sinkShip.hit();
+    sinkShip.hit();
+    expect(sinkShip.isSunk()).toBe(true);
+})
+
+test('Add 1 hit to a 2 length ship and it will not sink', () => {
+    const unSunkShip = createShip(2);
+    unSunkShip.hit();
+    expect(unSunkShip.isSunk()).toBe(false);
+})

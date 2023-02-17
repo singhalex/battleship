@@ -5,7 +5,12 @@ export const createShip = (length) => {
         hits += 1;
     }
 
-
-    const isSunk = 1;
-    return { length, getHits, hit}
+    const isSunk = () => {
+        if (hits >= length) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    return { length, getHits, hit, isSunk}
 }
