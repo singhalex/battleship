@@ -10,9 +10,9 @@ export const createBoard = () => {
     }
 
     const placeShip = (length, x, y) => {
-        const fiveShip = createShip(length);
+        const ship = createShip(length);
         for (let i = 0; i < length; i++) {
-            gameBoard[x + i][y] = fiveShip;
+            gameBoard[x + i][y] = ship;
         }
     }
 
