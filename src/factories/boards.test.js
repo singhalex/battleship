@@ -60,3 +60,11 @@ test('Place a 5 length ship at coordinates [1,1] vertically', () => {
     expect(board.gameBoard[x][y + 3].length).toBe(length)
     expect(board.gameBoard[x][y + 4].length).toBe(length)
 })
+
+test('Returns null if the ship does not fit on the board vertically', () => {
+    const length = 5;
+    const x = 1;
+    const y = 5;
+    const board = createBoard();
+    expect(board.placeShip(length, x, y, false)).toBe(null)
+})

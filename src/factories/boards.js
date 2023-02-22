@@ -11,7 +11,8 @@ export const createBoard = () => {
 
     const placeShip = (length, x, y, horizontal = true) => {
 
-        if (x + length > 9) return null;
+        if (x + length > 9 && horizontal) return null;
+        if (y + length > 9 && horizontal === false) return null;
         const ship = createShip(length);
         if (horizontal) {
             for (let i = 0; i < length; i++) {
