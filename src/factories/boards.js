@@ -10,11 +10,12 @@ export const createBoard = () => {
         gameBoard[i] = new Array(height)
     }
 
-    const placeShip = (length, x, y, horizontal = true) => {
-
+    const placeShip = (length, x, y, horizontal = true) => {]
+        // Check to see if ship will fit on the board
         if (x + length > 9 && horizontal) return null;
         if (y + length > 9 && horizontal === false) return null;
 
+        // Check each square for ships before placing
         if (horizontal) {
             for (let i = 0; i < length; i++) {
                 if (gameBoard[x + i][y]) return null
@@ -25,6 +26,7 @@ export const createBoard = () => {
             }
         }
 
+        // Create a ship and place it on the board
         const ship = createShip(length);
         if (horizontal) {
             for (let i = 0; i < length; i++) {
@@ -39,6 +41,8 @@ export const createBoard = () => {
 
     const receiveAttack = (x, y) => {
         let alreadyHit = false;
+
+        // Search the shot array for previous shots and return null if duplicated
         shots.forEach((element) => {
             if (JSON.stringify(element) == JSON.stringify([x, y])) {
                 alreadyHit = true;
@@ -47,11 +51,12 @@ export const createBoard = () => {
         if (alreadyHit) return null;
 
         gameBoard[x][y].hit();
+        // Record the shot location
         shots.push([x, y])
     }
 
-    return {
-        gameBoard, placeShip, receiveAttack
-    }
+    const allSunk = false;
+
+    return { gameBoard, allSunk, placeShip, receiveAttack }
 
 }
