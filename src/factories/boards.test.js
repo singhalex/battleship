@@ -78,3 +78,10 @@ test('Returns null if trying to place a ship where a ship already exists', () =>
 
     expect(board.placeShip(length, x, y)).toBe(null)
 })
+
+test('Send a hit to [1,1] where a ship is placed and the ship will increase its hit counter', () => {
+    const board = createBoard();
+    board.placeShip(5, 0, 0);
+    board.receiveAttack(0, 0);
+    expect(board.gameBoard[0][0].getHits()).toBe(1);
+})

@@ -36,8 +36,12 @@ export const createBoard = () => {
         }
     }
 
+    const receiveAttack = (x, y) => {
+        gameBoard[x][y].hit();
+    }
+
     return {
-        gameBoard, placeShip
+        gameBoard, placeShip, receiveAttack
     }
 
 }
