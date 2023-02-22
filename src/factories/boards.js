@@ -10,6 +10,8 @@ export const createBoard = () => {
     }
 
     const placeShip = (length, x, y) => {
+        if (x + length > 9) return null;
+
         const ship = createShip(length);
         for (let i = 0; i < length; i++) {
             gameBoard[x + i][y] = ship;

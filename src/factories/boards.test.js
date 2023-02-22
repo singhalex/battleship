@@ -20,7 +20,7 @@ test('Place a 5 length ship at coordinates [0,0] horizontally', () => {
     const y = 0;
     const board = createBoard();
     board.placeShip(length, x, y);
-    const fiveShip = createShip(5);
+    const fiveShip = createShip(length);
 
     expect(board.gameBoard[x][y].length).toBe(fiveShip.length)
     expect(board.gameBoard[x + 1][y].length).toBe(fiveShip.length)
@@ -29,14 +29,22 @@ test('Place a 5 length ship at coordinates [0,0] horizontally', () => {
     expect(board.gameBoard[x + 4][y].length).toBe(fiveShip.length)
 });
 
-test('Place a 2 length ship at coordinates [0,0] horizontally', () => {
+test('Place a 2 length ship at coordinates [0,1] horizontally', () => {
     const length = 2;
     const x = 0;
-    const y = 0;
+    const y = 1;
     const board = createBoard();
     board.placeShip(length, x, y);
-    const fiveShip = createShip(2);
+    const fiveShip = createShip(length);
 
     expect(board.gameBoard[x][y].length).toBe(fiveShip.length)
     expect(board.gameBoard[x + 1][y].length).toBe(fiveShip.length)
 });
+
+test('Returns null if the ship does not fit on the board', () => {
+    const length = 5;
+    const x = 5;
+    const y = 1;
+    const board = createBoard();
+    expect(board.placeShip(length, x, y)).toBe(null)
+})
