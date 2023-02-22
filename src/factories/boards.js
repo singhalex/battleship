@@ -10,7 +10,7 @@ export const createBoard = () => {
         gameBoard[i] = new Array(height)
     }
 
-    const placeShip = (length, x, y, horizontal = true) => {]
+    const placeShip = (length, x, y, horizontal = true) => {
         // Check to see if ship will fit on the board
         if (x + length > 9 && horizontal) return null;
         if (y + length > 9 && horizontal === false) return null;
