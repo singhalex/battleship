@@ -68,3 +68,13 @@ test('Returns null if the ship does not fit on the board vertically', () => {
     const board = createBoard();
     expect(board.placeShip(length, x, y, false)).toBe(null)
 })
+
+test('Returns null if trying to place a ship where a ship already exists', () => {
+    const length = 5;
+    const x = 1;
+    const y = 1;
+    const board = createBoard();
+    board.placeShip(5, 3, 0, false);
+
+    expect(board.placeShip(length, x, y)).toBe(null)
+})
