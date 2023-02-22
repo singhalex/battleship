@@ -20,13 +20,12 @@ test('Place a 5 length ship at coordinates [0,0] horizontally', () => {
     const y = 0;
     const board = createBoard();
     board.placeShip(length, x, y);
-    const fiveShip = createShip(length);
 
-    expect(board.gameBoard[x][y].length).toBe(fiveShip.length)
-    expect(board.gameBoard[x + 1][y].length).toBe(fiveShip.length)
-    expect(board.gameBoard[x + 2][y].length).toBe(fiveShip.length)
-    expect(board.gameBoard[x + 3][y].length).toBe(fiveShip.length)
-    expect(board.gameBoard[x + 4][y].length).toBe(fiveShip.length)
+    expect(board.gameBoard[x][y].length).toBe(length)
+    expect(board.gameBoard[x + 1][y].length).toBe(length)
+    expect(board.gameBoard[x + 2][y].length).toBe(length)
+    expect(board.gameBoard[x + 3][y].length).toBe(length)
+    expect(board.gameBoard[x + 4][y].length).toBe(length)
 });
 
 test('Place a 2 length ship at coordinates [0,1] horizontally', () => {
@@ -35,10 +34,9 @@ test('Place a 2 length ship at coordinates [0,1] horizontally', () => {
     const y = 1;
     const board = createBoard();
     board.placeShip(length, x, y);
-    const fiveShip = createShip(length);
 
-    expect(board.gameBoard[x][y].length).toBe(fiveShip.length)
-    expect(board.gameBoard[x + 1][y].length).toBe(fiveShip.length)
+    expect(board.gameBoard[x][y].length).toBe(length)
+    expect(board.gameBoard[x + 1][y].length).toBe(length)
 });
 
 test('Returns null if the ship does not fit on the board', () => {
@@ -47,4 +45,18 @@ test('Returns null if the ship does not fit on the board', () => {
     const y = 1;
     const board = createBoard();
     expect(board.placeShip(length, x, y)).toBe(null)
+})
+
+test('Place a 5 length ship at coordinates [1,1] vertically', () => {
+    const length = 5;
+    const x = 1;
+    const y = 1;
+    const board = createBoard();
+    board.placeShip(length, x, y, false);
+
+    expect(board.gameBoard[x][y].length).toBe(length)
+    expect(board.gameBoard[x][y + 1].length).toBe(length)
+    expect(board.gameBoard[x][y + 2].length).toBe(length)
+    expect(board.gameBoard[x][y + 3].length).toBe(length)
+    expect(board.gameBoard[x][y + 4].length).toBe(length)
 })
