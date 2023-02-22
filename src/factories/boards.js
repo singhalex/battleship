@@ -3,6 +3,7 @@ import { createShip } from "./ships";
 export const createBoard = () => {
     const width = 10;
     const height = 10;
+    const shots = [];
 
     const gameBoard = new Array(width);
     for (let i = 0; i < gameBoard.length; i++) {
@@ -37,7 +38,16 @@ export const createBoard = () => {
     }
 
     const receiveAttack = (x, y) => {
+        let alreadyHit = false;
+        shots.forEach((element) => {
+            if (JSON.stringify(element) == JSON.stringify([x, y])) {
+                alreadyHit = true;
+            }
+        })
+        if (alreadyHit) return null;
+
         gameBoard[x][y].hit();
+        shots.push([x, y])
     }
 
     return {

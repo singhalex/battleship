@@ -85,3 +85,10 @@ test('Send a hit to [1,1] where a ship is placed and the ship will increase its 
     board.receiveAttack(0, 0);
     expect(board.gameBoard[0][0].getHits()).toBe(1);
 })
+
+test('Sending a hit to a space that has already been hit returns null', () => {
+    const board = createBoard();
+    board.placeShip(5, 0, 0);
+    board.receiveAttack(0, 0);
+    expect(board.receiveAttack(0, 0)).toBe(null);
+})
