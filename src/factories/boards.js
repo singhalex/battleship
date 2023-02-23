@@ -4,6 +4,7 @@ export const createBoard = () => {
     const width = 10;
     const height = 10;
     const shots = [];
+    const sunkShips = [];
 
     const carrier = createShip(5);
     const battleship = createShip(4);
@@ -77,12 +78,18 @@ export const createBoard = () => {
         if (alreadyHit) return null;
 
         gameBoard[x][y].hit();
+        if (gameBoard[x][y].isSunk()) {
+            sunkShips.push(gameBoard[x][y]);
+        }
         // Record the shot location
         shots.push([x, y])
     }
 
-    const allSunk = false;
+    const allSunk = () => {
+        if (sunkShips.length === 5) return true;
+        return false;
+    };
 
-    return { gameBoard, allSunk, placeShip, receiveAttack }
+    return { gameBoard, placeShip, receiveAttack, allSunk }
 
 }

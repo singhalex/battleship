@@ -103,4 +103,33 @@ test('Sending a hit to a space that has already been hit returns null', () => {
     expect(board.receiveAttack(0, 0)).toBe(null);
 })
 
-// test('' )
+test('If all the ships have been sunk, the board returns true on allSunk method', () => {
+    const board = createBoard();
+    board.placeShip(0, 0); 
+    board.receiveAttack(0, 0);
+    board.receiveAttack(1, 0);
+    board.receiveAttack(2, 0);
+    board.receiveAttack(3, 0);
+    board.receiveAttack(4, 0);
+    
+    board.placeShip(0, 1); 
+    board.receiveAttack(0, 1);
+    board.receiveAttack(1, 1);
+    board.receiveAttack(2, 1);
+    board.receiveAttack(3, 1);
+    
+    board.placeShip(0, 2); 
+    board.receiveAttack(0, 2);
+    board.receiveAttack(1, 2);
+    board.receiveAttack(2, 2);
+    
+    board.placeShip(0, 3); 
+    board.receiveAttack(0, 3);
+    board.receiveAttack(1, 3);
+    board.receiveAttack(2, 3);
+    
+    board.placeShip(0, 4); 
+    board.receiveAttack(0, 4);
+    board.receiveAttack(1, 4);
+    expect(board.allSunk()).toBe(true);
+})
