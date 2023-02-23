@@ -15,7 +15,11 @@ export const createPlayer = (name) => {
             cpuAttack(enemyBoard);
         }
     }
+
+    const playerAttack = (cpu, xyArray) => {
+        return cpu.board.receiveAttack(xyArray);
+    }
     
 
-    return {name, board, cpuAttack}
+    return {name, board, cpuAttack, playerAttack}
 }
