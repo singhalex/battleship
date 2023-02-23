@@ -66,23 +66,23 @@ export const createBoard = () => {
         }
     }
 
-    const receiveAttack = (x, y) => {
+    const receiveAttack = (xyArray) => {
         let alreadyHit = false;
 
         // Search the shot array for previous shots and return null if duplicated
         shots.forEach((element) => {
-            if (JSON.stringify(element) == JSON.stringify([x, y])) {
+            if (JSON.stringify(element) == JSON.stringify([xyArray[0], xyArray[1]])) {
                 alreadyHit = true;
             }
         })
         if (alreadyHit) return null;
 
-        gameBoard[x][y].hit();
-        if (gameBoard[x][y].isSunk()) {
-            sunkShips.push(gameBoard[x][y]);
+        gameBoard[xyArray[0]][xyArray[1]].hit();
+        if (gameBoard[xyArray[0]][xyArray[1]].isSunk()) {
+            sunkShips.push(gameBoard[xyArray[0]][xyArray[1]]);
         }
         // Record the shot location
-        shots.push([x, y])
+        shots.push([xyArray[0], xyArray[1]])
     }
 
     const allSunk = () => {
