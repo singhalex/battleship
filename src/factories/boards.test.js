@@ -1,5 +1,4 @@
 import { createBoard } from "./boards";
-import { createShip } from "./ships";
 
 test('Game board should have a width of 10', () => {
     const board = createBoard();
