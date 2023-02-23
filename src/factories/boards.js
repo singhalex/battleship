@@ -5,35 +5,50 @@ export const createBoard = () => {
     const height = 10;
     const shots = [];
 
+    const carrier = createShip(5);
+    const battleship = createShip(4);
+    const destroyer = createShip(3);
+    const submarine = createShip(3);
+    const patrolBoat = createShip(2);
+
+    const ships = [];
+    ships.push(patrolBoat);
+    ships.push(submarine);
+    ships.push(destroyer);
+    ships.push(battleship);
+    ships.push(carrier);
+
     const gameBoard = new Array(width);
     for (let i = 0; i < gameBoard.length; i++) {
         gameBoard[i] = new Array(height)
     }
 
-    const placeShip = (length, x, y, horizontal = true) => {
+    const placeShip = (x, y, horizontal = true) => {
+        const ship = ships.pop();
+        
         // Check to see if ship will fit on the board
-        if (x + length > 9 && horizontal) return null;
-        if (y + length > 9 && horizontal === false) return null;
+        if (x + ship.length > 9 && horizontal) return null;
+        if (y + ship.length > 9 && horizontal === false) return null;
 
         // Check each square for ships before placing
         if (horizontal) {
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < ship.length; i++) {
                 if (gameBoard[x + i][y]) return null
             }
         } else {
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < ship.length; i++) {
                 if (gameBoard[x][y + i]) return null
             }
         }
 
         // Create a ship and place it on the board
-        const ship = createShip(length);
+        // const ship = createShip(length);
         if (horizontal) {
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < ship.length; i++) {
                 gameBoard[x + i][y] = ship;
             }
         } else {
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < ship.length; i++) {
                 gameBoard[x][y + i] = ship;
             }
         }
