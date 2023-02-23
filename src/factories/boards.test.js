@@ -132,3 +132,9 @@ test('If all the ships have been sunk, the board returns true on allSunk method'
     board.receiveAttack([1, 4]);
     expect(board.allSunk()).toBe(true);
 })
+
+test('Shoot an square with no ship', () => {
+    const board = createBoard();
+    board.receiveAttack([0, 0]);
+    expect(board.receiveAttack([0,0])).toBe(null)
+})

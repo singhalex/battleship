@@ -13,11 +13,16 @@ test('Player has a 10x10 game board', () => {
     }
 })
 
-test.skip('Computer can attack a random square', () => {
+test('Computer can attack a random square', () => {
     const cpu = createPlayer('Computer');
     const john = createPlayer('John');
+    john.board.placeShip(0, 0);
+    john.board.placeShip(0, 1);
+    john.board.placeShip(0, 2);
+    john.board.placeShip(0, 3);
+    john.board.placeShip(0, 4);
     for (let i = 0; i < 100; i++) {
-        john.board.receiveAttack(cpu.cpuAttack());
+        cpu.cpuAttack(john.board);
     }
 
     expect(john.board.allSunk()).toBe(true);

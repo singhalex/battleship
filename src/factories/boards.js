@@ -77,8 +77,8 @@ export const createBoard = () => {
         })
         if (alreadyHit) return null;
 
-        gameBoard[xyArray[0]][xyArray[1]].hit();
-        if (gameBoard[xyArray[0]][xyArray[1]].isSunk()) {
+        gameBoard[xyArray[0]][xyArray[1]]?.hit();
+        if (gameBoard[xyArray[0]][xyArray[1]]?.isSunk()) {
             sunkShips.push(gameBoard[xyArray[0]][xyArray[1]]);
         }
         // Record the shot location
