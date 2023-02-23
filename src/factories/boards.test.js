@@ -93,6 +93,7 @@ test('Send a hit to [1,1] where a ship is placed and the ship will increase its 
     board.placeShip(0, 0);
     board.receiveAttack([0,0]);
     expect(board.gameBoard[0][0].getHits()).toBe(1);
+    expect(board.receiveAttack([1,0])).toBe('Hit!')
 })
 
 test('Sending a hit to a space that has already been hit returns null', () => {
@@ -133,8 +134,7 @@ test('If all the ships have been sunk, the board returns true on allSunk method'
     expect(board.allSunk()).toBe(true);
 })
 
-test('Shoot an square with no ship', () => {
+test('Shooting a square with no ship returns "Miss!"', () => {
     const board = createBoard();
-    board.receiveAttack([0, 0]);
-    expect(board.receiveAttack([0,0])).toBe(null)
+    expect(board.receiveAttack([0,0])).toBe('Miss!')
 })

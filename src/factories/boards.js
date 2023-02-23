@@ -78,14 +78,34 @@ export const createBoard = () => {
         if (alreadyHit) return null;
 
         const currentSpace = gameBoard[xyArray[0]][xyArray[1]];
+
+        // Record the shot location
+        shots.push(xyArray)
         
         // Add a hit if there is a ship at the space
         currentSpace?.hit();
         if (currentSpace?.isSunk()) {
             sunkShips.push(currentSpace);
+            return sunkAnnouncement(currentSpace);
+        } else if (currentSpace?.length) {
+            return `Hit!`;
+        } else {
+            return 'Miss!'
         }
-        // Record the shot location
-        shots.push(xyArray)
+    }
+
+
+    const sunkAnnouncement = (ship) => {
+        if (ship.length === 5) {
+            return 'Carrier sunk!';
+        } else if (ship.length === 4) {
+            return 'Battleship sunk!';
+        } else if (ship.length === 3) {
+            return 'Destroyer sunk!';
+        } else if (ship.length === 2) {
+            return 'Patrol Boat Sunk';
+        }
+
     }
 
     const allSunk = () => {
