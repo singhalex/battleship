@@ -80,6 +80,15 @@ test('Returns null if trying to place a ship where a ship already exists', () =>
     expect(board.placeShip(x, y)).toBe(null)
 })
 
+test('Places a battleship if already tried to place it where a ship exits', () => {
+    const board = createBoard();
+    board.placeShip(3, 0, false); // Places carrier
+    board.placeShip(1, 1); // Returns null
+    board.placeShip(0, 0, false); // Places battleship
+    
+    expect(board.gameBoard[0][0].length).toBe(4)
+})
+
 test('Send a hit to [1,1] where a ship is placed and the ship will increase its hit counter', () => {
     const board = createBoard();
     board.placeShip(0, 0);

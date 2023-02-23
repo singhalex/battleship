@@ -25,24 +25,35 @@ export const createBoard = () => {
 
     const placeShip = (x, y, horizontal = true) => {
         const ship = ships.pop();
-        
+
         // Check to see if ship will fit on the board
-        if (x + ship.length > 9 && horizontal) return null;
-        if (y + ship.length > 9 && horizontal === false) return null;
+        if (x + ship.length > 9 && horizontal) {
+            ships.push(ship);
+            return null;
+        }
+        if (y + ship.length > 9 && horizontal === false) {
+            ships.push(ship);   
+            return null;
+        }
 
         // Check each square for ships before placing
         if (horizontal) {
             for (let i = 0; i < ship.length; i++) {
-                if (gameBoard[x + i][y]) return null
+                if (gameBoard[x + i][y]) {
+                    ships.push(ship);
+                    return null;
+                }
             }
         } else {
             for (let i = 0; i < ship.length; i++) {
-                if (gameBoard[x][y + i]) return null
+                if (gameBoard[x][y + i]) {
+                    ships.push(ship);
+                    return null;
+                }
             }
         }
 
-        // Create a ship and place it on the board
-        // const ship = createShip(length);
+        // Place ship on the board
         if (horizontal) {
             for (let i = 0; i < ship.length; i++) {
                 gameBoard[x + i][y] = ship;
