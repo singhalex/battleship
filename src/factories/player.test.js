@@ -8,8 +8,8 @@ test('Create player named John', () => {
 test('Player has a 10x10 game board', () => {
     const john = createPlayer('John');
 
-    for (let i = 0; i < john.board.gameBoard.length; i++) {
-        expect(john.board.gameBoard[i].length).toBe(10)
+    for (let i = 0; i < john.board.grid.length; i++) {
+        expect(john.board.grid[i].length).toBe(10)
     }
 })
 

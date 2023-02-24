@@ -19,9 +19,9 @@ export const createBoard = () => {
     ships.push(battleship);
     ships.push(carrier);
 
-    const gameBoard = new Array(width);
-    for (let i = 0; i < gameBoard.length; i++) {
-        gameBoard[i] = new Array(height)
+    const grid = new Array(width);
+    for (let i = 0; i < grid.length; i++) {
+        grid[i] = new Array(height)
     }
 
     const placeShip = (x, y, horizontal = true) => {
@@ -40,14 +40,14 @@ export const createBoard = () => {
         // Check each square for ships before placing
         if (horizontal) {
             for (let i = 0; i < ship.length; i++) {
-                if (gameBoard[x + i][y]) {
+                if (grid[x + i][y]) {
                     ships.push(ship);
                     return null;
                 }
             }
         } else {
             for (let i = 0; i < ship.length; i++) {
-                if (gameBoard[x][y + i]) {
+                if (grid[x][y + i]) {
                     ships.push(ship);
                     return null;
                 }
@@ -57,11 +57,11 @@ export const createBoard = () => {
         // Place ship on the board
         if (horizontal) {
             for (let i = 0; i < ship.length; i++) {
-                gameBoard[x + i][y] = ship;
+                grid[x + i][y] = ship;
             }
         } else {
             for (let i = 0; i < ship.length; i++) {
-                gameBoard[x][y + i] = ship;
+                grid[x][y + i] = ship;
             }
         }
     }
@@ -77,7 +77,7 @@ export const createBoard = () => {
         })
         if (alreadyHit) return null;
 
-        const currentSpace = gameBoard[xyArray[0]][xyArray[1]];
+        const currentSpace = grid[xyArray[0]][xyArray[1]];
 
         // Record the shot location
         shots.push(xyArray)
@@ -113,6 +113,6 @@ export const createBoard = () => {
         return false;
     };
 
-    return { gameBoard, placeShip, receiveAttack, allSunk }
+    return { grid, placeShip, receiveAttack, allSunk }
 
 }

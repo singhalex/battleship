@@ -2,14 +2,14 @@ import { createBoard } from "./boards";
 
 test('Game board should have a width of 10', () => {
     const board = createBoard();
-    expect(board.gameBoard.length).toBe(10)
+    expect(board.grid.length).toBe(10)
 });
 
 test('Every column of game board should have a height of 10', () => {
     const board = createBoard();
 
-    for (let i = 0; i < board.gameBoard.length; i++) {
-        expect(board.gameBoard[i].length).toBe(10)
+    for (let i = 0; i < board.grid.length; i++) {
+        expect(board.grid[i].length).toBe(10)
     }
 });
 
@@ -20,11 +20,11 @@ test('Place a 5 length ship at coordinates [0,0] horizontally', () => {
     const board = createBoard();
     board.placeShip(x, y);
 
-    expect(board.gameBoard[x][y].length).toBe(carrierLength)
-    expect(board.gameBoard[x + 1][y].length).toBe(carrierLength)
-    expect(board.gameBoard[x + 2][y].length).toBe(carrierLength)
-    expect(board.gameBoard[x + 3][y].length).toBe(carrierLength)
-    expect(board.gameBoard[x + 4][y].length).toBe(carrierLength)
+    expect(board.grid[x][y].length).toBe(carrierLength)
+    expect(board.grid[x + 1][y].length).toBe(carrierLength)
+    expect(board.grid[x + 2][y].length).toBe(carrierLength)
+    expect(board.grid[x + 3][y].length).toBe(carrierLength)
+    expect(board.grid[x + 4][y].length).toBe(carrierLength)
 });
 
 test('Place all ships on the board', () => {
@@ -35,11 +35,11 @@ test('Place all ships on the board', () => {
     board.placeShip(0, 3); // Places the submarine 3 length
     board.placeShip(0, 4); // Places the patrol boat 2 length
 
-    expect(board.gameBoard[0][0].length).toBe(5)
-    expect(board.gameBoard[0][0 + 1].length).toBe(4)
-    expect(board.gameBoard[0][0 + 2].length).toBe(3)
-    expect(board.gameBoard[0][0 + 3].length).toBe(3)
-    expect(board.gameBoard[0][0 + 4].length).toBe(2)
+    expect(board.grid[0][0].length).toBe(5)
+    expect(board.grid[0][0 + 1].length).toBe(4)
+    expect(board.grid[0][0 + 2].length).toBe(3)
+    expect(board.grid[0][0 + 3].length).toBe(3)
+    expect(board.grid[0][0 + 4].length).toBe(2)
 });
 
 test('Returns null if the ship does not fit on the board', () => {
@@ -56,11 +56,11 @@ test('Place a 5 length ship at coordinates [1,1] vertically', () => {
     const board = createBoard();
     board.placeShip(x, y, false);
 
-    expect(board.gameBoard[x][y].length).toBe(battleshipLength)
-    expect(board.gameBoard[x][y + 1].length).toBe(battleshipLength)
-    expect(board.gameBoard[x][y + 2].length).toBe(battleshipLength)
-    expect(board.gameBoard[x][y + 3].length).toBe(battleshipLength)
-    expect(board.gameBoard[x][y + 4].length).toBe(battleshipLength)
+    expect(board.grid[x][y].length).toBe(battleshipLength)
+    expect(board.grid[x][y + 1].length).toBe(battleshipLength)
+    expect(board.grid[x][y + 2].length).toBe(battleshipLength)
+    expect(board.grid[x][y + 3].length).toBe(battleshipLength)
+    expect(board.grid[x][y + 4].length).toBe(battleshipLength)
 })
 
 test('Returns null if the ship does not fit on the board vertically', () => {
@@ -85,14 +85,14 @@ test('Places a battleship if already tried to place it where a ship exits', () =
     board.placeShip(1, 1); // Returns null
     board.placeShip(0, 0, false); // Places battleship
     
-    expect(board.gameBoard[0][0].length).toBe(4)
+    expect(board.grid[0][0].length).toBe(4)
 })
 
 test('Send a hit to [1,1] where a ship is placed and the ship will increase its hit counter', () => {
     const board = createBoard();
     board.placeShip(0, 0);
     board.receiveAttack([0,0]);
-    expect(board.gameBoard[0][0].getHits()).toBe(1);
+    expect(board.grid[0][0].getHits()).toBe(1);
     expect(board.receiveAttack([1,0])).toBe('Hit!')
 })
 
