@@ -29,17 +29,26 @@
   width: var(--cell-size);
   height: var(--cell-size);
   background-color: gray;
-  cursor: pointer;
   border: solid 1px darkgray;
+}
+
+.hoverable {
+  cursor: pointer;
+}
+
+.hoverable:hover {
+  opacity: 0.8;
 }
 
 #ships {
   max-width: calc(var(--cell-size) * 22);
+  height: calc(var(--cell-size) * 6);
   background-color: lightgray;
   padding: var(--cell-size);
   display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 #carrier {
