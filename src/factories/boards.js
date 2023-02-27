@@ -113,6 +113,6 @@ export const createBoard = () => {
         return false;
     };
 
-    return { grid, placeShip, receiveAttack, allSunk }
+    return { grid, ships, placeShip, receiveAttack, allSunk }
 
 }
