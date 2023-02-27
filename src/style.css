@@ -1,5 +1,5 @@
 :root {
-  --cell-size: 20px;
+  --cell-size: 15px;
 }
 
 * {
@@ -42,7 +42,6 @@
 
 #ships {
   max-width: calc(var(--cell-size) * 22);
-  height: calc(var(--cell-size) * 6);
   background-color: lightgray;
   padding: var(--cell-size);
   display: flex;
@@ -57,10 +56,20 @@
   background-color: brown;
 }
 
+#carrier.vertical {
+  height: calc(var(--cell-size) * 5);
+  width: var(--cell-size);
+}
+
 #battleship {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 4);
   background-color: green;
+}
+
+#battleship.vertical {
+  width: var(--cell-size);
+  height: calc(var(--cell-size) * 4);
 }
 
 #destroyer {
@@ -69,14 +78,29 @@
   background-color: blue;
 }
 
+#destroyer.vertical {
+  width: var(--cell-size);
+  height: calc(var(--cell-size) * 3);
+}
+
 #submarine {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 3);
   background-color: yellow;
 }
 
+#submarine.vertical {
+  width: var(--cell-size);
+  height: calc(var(--cell-size) * 3);
+}
+
 #patrol-boat {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 2);
   background-color: purple;
+}
+
+#patrol-boat.vertical {
+  width: var(--cell-size);
+  height: calc(var(--cell-size) * 2);
 }

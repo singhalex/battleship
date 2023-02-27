@@ -11,6 +11,12 @@ export const userInterface = () => {
                 if (player.name === 'CPU') {
                     square.classList.add('hoverable')
                     square.addEventListener('click', () => {
+                        if (ships.length !== 0) {
+                            const message = document.querySelector('span');
+                            message.textContent = 'Place your ships first.';
+                            return
+                        };
+
                         if (player.board.ships.length !== 0) {
                             player.board.placeShip(x, y)
                             console.log(player.name)
@@ -25,7 +31,7 @@ export const userInterface = () => {
         }
     }
 
-    
+
 
     const rotateButton = document.querySelector('#rotate');
     const ships = document.querySelector('#ships').children
@@ -33,7 +39,7 @@ export const userInterface = () => {
     rotateButton.addEventListener('click', () => {
         degrees = degrees === 0 ? 90 : 0;
         for (const ship of ships) {
-            ship.style.transform = `rotate(${degrees}deg)`
+            ship.classList.toggle('vertical');
         }
     })
 
