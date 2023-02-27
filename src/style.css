@@ -7,7 +7,8 @@
 }
 
 #boards-container {
-  width: calc(var(--cell-size) + 12);
+  max-width: calc(var(--cell-size) * 22);
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   gap: var(--cell-size);
@@ -30,4 +31,43 @@
   background-color: gray;
   cursor: pointer;
   border: solid 1px darkgray;
+}
+
+#ships {
+  max-width: calc(var(--cell-size) * 22);
+  background-color: lightgray;
+  padding: var(--cell-size);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#carrier {
+  height: var(--cell-size);
+  width: calc(var(--cell-size) * 5);
+  background-color: brown;
+}
+
+#battleship {
+  height: var(--cell-size);
+  width: calc(var(--cell-size) * 4);
+  background-color: green;
+}
+
+#destroyer {
+  height: var(--cell-size);
+  width: calc(var(--cell-size) * 3);
+  background-color: blue;
+}
+
+#submarine {
+  height: var(--cell-size);
+  width: calc(var(--cell-size) * 3);
+  background-color: yellow;
+}
+
+#patrol-boat {
+  height: var(--cell-size);
+  width: calc(var(--cell-size) * 2);
+  background-color: purple;
 }
