@@ -28,11 +28,11 @@ export const createBoard = () => {
         const ship = ships.pop();
 
         // Check to see if ship will fit on the board
-        if (x + ship.length > 9 && horizontal) {
+        if (x + ship.length > 10 && horizontal) {
             ships.push(ship);
             return null;
         }
-        if (y + ship.length > 9 && horizontal === false) {
+        if (y + ship.length > 10 && horizontal === false) {
             ships.push(ship);   
             return null;
         }
