@@ -1,5 +1,7 @@
 export const userInterface = () => {
     const ships = document.querySelector('#ships').children;
+    const message = document.querySelector('span');
+    message.textContent = 'Place the Carrier';
     const rotateButton = document.querySelector('#rotate');
     let degrees = 0;
     rotateButton.addEventListener('click', () => {
@@ -23,7 +25,7 @@ export const userInterface = () => {
 
                 square.className = 'square';
                 if (player.name === 'CPU') {
-                    cpuClickHandler(square);
+                    cpuClickHandler(square, player);
                 }
 
                 if (player.name === 'Player') {
@@ -44,25 +46,66 @@ export const userInterface = () => {
         const dropX = Number(e.target.dataset.x);
         const dropY = Number(e.target.dataset.y);
         const horizontal = degrees === 0;
-        console.log(dropX)
-        if (player.board.ships.length !== 0) {
-            
             if (player.board.placeShip(dropX, dropY, horizontal) !== null) {
+                paintSquares(dropX, dropY);
                 draggedShip.remove();
+                if (ships.length !== 0) {
+                    ships[0].setAttribute('draggable', true)
+                    message.textContent = `Place the ${ships[0].id}`
+                } else {
+                    message.textContent = 'Time to attack!'
+                }
             };
-            console.log(player.name);
-            console.log(player.board.ships)
+    }
+
+    function paintSquares(x, y) {
+        let length;
+        if (draggedShip.id === 'carrier') {
+            length = 5;
+        } else if (draggedShip.id === 'battleship') {
+            length = 4;
+        } else if(draggedShip.id === 'destroyer' || draggedShip.id === 'submarine') {
+            length = 3;
+        } else {
+            length = 2;
+        }
+
+        if (degrees === 0) {
+            for (let i = 0; i < length; i++) {
+                document.querySelector(`[data-x="${x + i}"][data-y="${y}"]`).classList.add(`${draggedShip.id}`)
+            }
+        } else if (degrees === 90) {
+            for (let i = 0; i < length; i++) {
+                document.querySelector(`[data-x="${x}"][data-y="${y + i}"]`).classList.add(`${draggedShip.id}`)
+            }
+            
         }
     }
 
     function cpuClickHandler(square, player) {
         square.classList.add('hoverable')
         square.addEventListener('click', () => {
+            const x = Number(square.dataset.x);
+            const y = Number(square.dataset.y);
+            const xyArray = [x, y];
+            console.log(xyArray);
             if (ships.length !== 0) {
-                const message = document.querySelector('span');
                 message.textContent = 'Place your ships first.';
                 return
             };
+            const attackResult = player.board.receiveAttack(xyArray);
+            console.log(attackResult);
+            if (attackResult === 'Hit!'
+                || attackResult === 'Patrol Boat sunk!'
+                || attackResult === 'Carrier sunk!'
+                || attackResult === 'Battleship sunk!'
+                || attackResult === 'Destroyer sunk!') {
+                    square.classList.add('hit')
+                } else if (attackResult === 'Miss!') {
+                    console.log('We missing')
+                    square.classList.add('miss')
+                }
+            message.textContent = attackResult;
         })
     }
 
@@ -74,7 +117,6 @@ export const userInterface = () => {
 
     function dragstart(e) {
         draggedShip = e.target;
-        console.log(draggedShip);
     }
     
     return { buildGrid }

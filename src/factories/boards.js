@@ -24,6 +24,15 @@ export const createBoard = () => {
         grid[i] = new Array(height)
     }
 
+    const randomizeShips = () => {
+        while (ships.length !== 0) {
+            const x = Math.floor(Math.random() * 10);
+            const y = Math.floor(Math.random() * 10);
+            const randomHorizontal = Math.random() < 0.5;
+            placeShip(x, y, randomHorizontal)
+        }
+    }
+
     const placeShip = (x, y, horizontal = true) => {
         const ship = ships.pop();
 
@@ -103,7 +112,7 @@ export const createBoard = () => {
         } else if (ship.length === 3) {
             return 'Destroyer sunk!';
         } else if (ship.length === 2) {
-            return 'Patrol Boat Sunk';
+            return 'Patrol Boat sunk!';
         }
 
     }
@@ -113,6 +122,6 @@ export const createBoard = () => {
         return false;
     };
 
-    return { grid, ships, placeShip, receiveAttack, allSunk }
+    return { grid, ships, placeShip, receiveAttack, allSunk, randomizeShips }
 
 }

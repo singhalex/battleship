@@ -31,6 +31,14 @@
   border: solid 1px darkgray;
 }
 
+.miss {
+  background-color: darkblue;
+}
+
+.hit {
+  background-color: red;
+}
+
 .hoverable {
   cursor: pointer;
 }
@@ -49,13 +57,20 @@
   gap: 0.5rem;
 }
 
-#ships > * {
+#ships > div:first-child {
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(37, 173, 162, 1);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(37, 173, 162, 1);
+  box-shadow: 0px 0px 5px 5px rgba(37, 173, 162, 1);
 }
 
 #carrier {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 5);
+  background-color: brown;
+}
+
+.carrier {
   background-color: brown;
 }
 
@@ -70,6 +85,10 @@
   background-color: green;
 }
 
+.battleship {
+  background-color: green;
+}
+
 #battleship.vertical {
   width: var(--cell-size);
   height: calc(var(--cell-size) * 4);
@@ -78,6 +97,10 @@
 #destroyer {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 3);
+  background-color: blue;
+}
+
+.destroyer {
   background-color: blue;
 }
 
@@ -92,6 +115,10 @@
   background-color: yellow;
 }
 
+.submarine {
+  background-color: yellow;
+}
+
 #submarine.vertical {
   width: var(--cell-size);
   height: calc(var(--cell-size) * 3);
@@ -100,6 +127,10 @@
 #patrol-boat {
   height: var(--cell-size);
   width: calc(var(--cell-size) * 2);
+  background-color: purple;
+}
+
+.patrol-boat {
   background-color: purple;
 }
 
