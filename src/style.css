@@ -33,6 +33,7 @@
   position: relative;
 }
 
+/* Add x symbol to squares when hit */
 .player-hit::after {
   position: absolute;
   content: "\00d7";
@@ -155,6 +156,7 @@ button {
   margin-block: 0.5rem;
 }
 
+/* Full screen message hidden by default */
 .winning-message {
   position: absolute;
   top: 0;
@@ -175,6 +177,7 @@ button {
   cursor: pointer;
 }
 
+/* Makes the full screen message visible */
 .winning-message.show {
   display: flex;
 }

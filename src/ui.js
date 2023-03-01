@@ -1,9 +1,11 @@
 export const userInterface = () => {
     let thePlayer;
     let cpu;
+    // Draggable ship elements
     const ships = document.querySelector('#ships').children;
+    // Keep a copy to re-add them when starting a new game
     const shipsCopy = [...ships];
-    console.log(shipsCopy);
+
     const cpuInfo = document.querySelector('#cpu-info');
     const message = document.querySelector('span');
     message.textContent = 'Place the Carrier';
@@ -21,12 +23,15 @@ export const userInterface = () => {
     }
 
     const buildGrid = (player) => {
+        // Assign the player objects
         if (player.name === 'Player') thePlayer = player;
         if (player.name === 'CPU') cpu = player;
+
         const container = document.querySelector(`#${player.name.toLowerCase()}-board`);
         for (let x = 0; x < player.board.grid.length; x++) {
             for (let y = 0; y < player.board.grid[x].length; y++) {
                 const square = document.createElement('div');
+                // Give x y coordinates to div's
                 square.dataset.x = x;
                 square.dataset.y = y;
 
@@ -50,19 +55,23 @@ export const userInterface = () => {
     }
 
     function dropShip(e, player) {
+        // Grab x y coordinates from square being dragged over
         const dropX = Number(e.target.dataset.x);
         const dropY = Number(e.target.dataset.y);
+        // Gets true if horizontal, false if vertical
         const horizontal = degrees === 0;
-            if (player.board.placeShip(dropX, dropY, horizontal) !== null) {
-                paintSquares(dropX, dropY);
-                draggedShip.remove();
-                if (ships.length !== 0) {
-                    ships[0].setAttribute('draggable', true)
-                    message.textContent = `Place the ${ships[0].id}`
-                } else {
-                    message.textContent = 'Time to attack!'
-                }
-            };
+
+        if (player.board.placeShip(dropX, dropY, horizontal) !== null) {
+            paintSquares(dropX, dropY);
+            draggedShip.remove();
+            // Makes the next ship draggable
+            if (ships.length !== 0) {
+                ships[0].setAttribute('draggable', true)
+                message.textContent = `Place the ${ships[0].id}`
+            } else {
+                message.textContent = 'Time to attack!'
+            }
+        };
     }
 
     function paintSquares(x, y) {
@@ -77,6 +86,7 @@ export const userInterface = () => {
             length = 2;
         }
 
+        // Add the ship name to the class of the div on the board to apply the correct color
         if (degrees === 0) {
             for (let i = 0; i < length; i++) {
                 document.querySelector(`[data-x="${x + i}"][data-y="${y}"]`).classList.add(`${draggedShip.id}`)
@@ -112,6 +122,8 @@ export const userInterface = () => {
             message.textContent = attackResult;
             let gameOver = checkWin();
             if (gameOver) return;
+
+            // Set a small delay on cpu attack
             setTimeout(() => {
                 let results = cpu.cpuAttack(thePlayer.board);
                 cpuInfo.textContent = results.attackResult;
@@ -148,7 +160,6 @@ export const userInterface = () => {
         }
 
         return false;
-
     }
 
     // Drag ships
@@ -160,15 +171,6 @@ export const userInterface = () => {
     function dragstart(e) {
         draggedShip = e.target;
     }
-
-    const rebuildShips = () => {
-        const shipsContainer = document.querySelector('#ships');
-        shipsCopy.forEach(ship => {
-            shipsContainer.appendChild(ship);
-
-        })
-    }
     
     return { buildGrid, rebuildShips }
-
 }

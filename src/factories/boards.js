@@ -12,6 +12,7 @@ export const createBoard = () => {
     const submarine = createShip(3);
     const patrolBoat = createShip(2);
 
+    // Track the ships in an array
     const ships = [];
     ships.push(patrolBoat);
     ships.push(submarine);
@@ -19,11 +20,13 @@ export const createBoard = () => {
     ships.push(battleship);
     ships.push(carrier);
 
+    // Create a 2d grid
     const grid = new Array(width);
     for (let i = 0; i < grid.length; i++) {
         grid[i] = new Array(height)
     }
 
+    // Place ships randomly on the grid
     const randomizeShips = () => {
         while (ships.length !== 0) {
             const x = Math.floor(Math.random() * 10);
@@ -33,6 +36,7 @@ export const createBoard = () => {
         }
     }
 
+    // Manually place ships
     const placeShip = (x, y, horizontal = true) => {
         const ship = ships.pop();
 
