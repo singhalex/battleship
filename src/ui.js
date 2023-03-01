@@ -2,6 +2,8 @@ export const userInterface = () => {
     let thePlayer;
     let cpu;
     const ships = document.querySelector('#ships').children;
+    const shipsCopy = [...ships];
+    console.log(shipsCopy);
     const cpuInfo = document.querySelector('#cpu-info');
     const message = document.querySelector('span');
     message.textContent = 'Place the Carrier';
@@ -108,10 +110,10 @@ export const userInterface = () => {
                     square.classList.add('miss')
                 } else if (attackResult === null) return;
             message.textContent = attackResult;
-            // checkWin();
+            let gameOver = checkWin();
+            if (gameOver) return;
             setTimeout(() => {
                 let results = cpu.cpuAttack(thePlayer.board);
-                console.log(results);
                 cpuInfo.textContent = results.attackResult;
                 const playerSquare = document.querySelector(`[data-x="${results.x}"][data-y="${results.y}"]`)
 
@@ -125,9 +127,28 @@ export const userInterface = () => {
                     playerSquare.classList.add('miss')
                 }
 
-                // checkWin();
-            }, 500);
+                gameOver = checkWin();
+                if (gameOver) return;
+            }, 250);
         })
+    }
+
+    const winScreen = document.querySelector('#winning-message');
+    function checkWin() {
+        const winMessage = document.querySelector('#winning-text');
+        if (thePlayer.board.allSunk()) {
+            winScreen.classList.add('show');
+            winMessage.textContent = 'Computer wins!';
+            return true;
+        }
+        if (cpu.board.allSunk()) {
+            winScreen.classList.add('show');
+            winMessage.textContent = 'You win!'
+            return true;
+        }
+
+        return false;
+
     }
 
     // Drag ships
@@ -139,7 +160,16 @@ export const userInterface = () => {
     function dragstart(e) {
         draggedShip = e.target;
     }
+
+    const rebuildShips = () => {
+        const shipsContainer = document.querySelector('#ships');
+        shipsCopy.forEach(ship => {
+            console.log(ship);
+            shipsContainer.appendChild(ship);
+
+        })
+    }
     
-    return { buildGrid }
+    return { buildGrid, rebuildShips }
 
 }
