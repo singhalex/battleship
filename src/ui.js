@@ -164,7 +164,6 @@ export const userInterface = () => {
     const rebuildShips = () => {
         const shipsContainer = document.querySelector('#ships');
         shipsCopy.forEach(ship => {
-            console.log(ship);
             shipsContainer.appendChild(ship);
 
         })
