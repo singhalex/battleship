@@ -44,9 +44,9 @@ test('Place all ships on the board', () => {
 
 test('Returns null if the ship does not fit on the board', () => {
     const board = createBoard();
-    expect(board.placeShip(5, 1)).toBe(null);
-    expect(board.placeShip(0, 6, false)).toBe(null);
-    expect(board.placeShip(7,8)).toBe(null);
+    expect(board.placeShip(6, 1)).toBe(null);
+    expect(board.placeShip(0, 7, false)).toBe(null);
+    expect(board.placeShip(6,8)).toBe(null);
 })
 
 test('Place a 5 length ship at coordinates [1,1] vertically', () => {
@@ -65,7 +65,7 @@ test('Place a 5 length ship at coordinates [1,1] vertically', () => {
 
 test('Returns null if the ship does not fit on the board vertically', () => {
     const x = 1;
-    const y = 5;
+    const y = 6;
     const board = createBoard();
     expect(board.placeShip(x, y, false)).toBe(null)
 })
