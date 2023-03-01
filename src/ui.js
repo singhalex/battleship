@@ -108,6 +108,7 @@ export const userInterface = () => {
                     square.classList.add('miss')
                 } else if (attackResult === null) return;
             message.textContent = attackResult;
+            // checkWin();
             setTimeout(() => {
                 let results = cpu.cpuAttack(thePlayer.board);
                 console.log(results);
@@ -124,7 +125,8 @@ export const userInterface = () => {
                     playerSquare.classList.add('miss')
                 }
 
-            }, 0);
+                // checkWin();
+            }, 500);
         })
     }
 
