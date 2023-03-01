@@ -10,9 +10,14 @@ export const createPlayer = (name) => {
         
         coordinates.push(x);
         coordinates.push(y);
+
+        const attackResult = enemyBoard.receiveAttack(coordinates);
+        console.log(`This is the cpu attack: ${attackResult}`);
         
-        if (enemyBoard.receiveAttack(coordinates) === null) {
-            cpuAttack(enemyBoard);
+        if (attackResult === null) {
+            return cpuAttack(enemyBoard);
+        } else {
+            return { x, y, attackResult };
         }
     }
 

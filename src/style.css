@@ -29,6 +29,17 @@
   height: var(--cell-size);
   background-color: gray;
   border: solid 1px darkgray;
+  position: relative;
+}
+
+.player-hit::after {
+  position: absolute;
+  content: "\00d7";
+  top: -2px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
 }
 
 .miss {

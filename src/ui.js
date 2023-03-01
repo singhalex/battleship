@@ -1,5 +1,8 @@
 export const userInterface = () => {
+    let thePlayer;
+    let cpu;
     const ships = document.querySelector('#ships').children;
+    const cpuInfo = document.querySelector('#cpu-info');
     const message = document.querySelector('span');
     message.textContent = 'Place the Carrier';
     const rotateButton = document.querySelector('#rotate');
@@ -16,6 +19,8 @@ export const userInterface = () => {
     }
 
     const buildGrid = (player) => {
+        if (player.name === 'Player') thePlayer = player;
+        if (player.name === 'CPU') cpu = player;
         const container = document.querySelector(`#${player.name.toLowerCase()}-board`);
         for (let x = 0; x < player.board.grid.length; x++) {
             for (let y = 0; y < player.board.grid[x].length; y++) {
@@ -88,13 +93,11 @@ export const userInterface = () => {
             const x = Number(square.dataset.x);
             const y = Number(square.dataset.y);
             const xyArray = [x, y];
-            console.log(xyArray);
             if (ships.length !== 0) {
                 message.textContent = 'Place your ships first.';
                 return
             };
             const attackResult = player.board.receiveAttack(xyArray);
-            console.log(attackResult);
             if (attackResult === 'Hit!'
                 || attackResult === 'Patrol Boat sunk!'
                 || attackResult === 'Carrier sunk!'
@@ -102,10 +105,26 @@ export const userInterface = () => {
                 || attackResult === 'Destroyer sunk!') {
                     square.classList.add('hit')
                 } else if (attackResult === 'Miss!') {
-                    console.log('We missing')
                     square.classList.add('miss')
-                }
+                } else if (attackResult === null) return;
             message.textContent = attackResult;
+            setTimeout(() => {
+                let results = cpu.cpuAttack(thePlayer.board);
+                console.log(results);
+                cpuInfo.textContent = results.attackResult;
+                const playerSquare = document.querySelector(`[data-x="${results.x}"][data-y="${results.y}"]`)
+
+                if (results.attackResult === 'Hit!'
+                || results.attackResult === 'Patrol Boat sunk!'
+                || results.attackResult === 'Carrier sunk!'
+                || results.attackResult === 'Battleship sunk!'
+                || results.attackResult === 'Destroyer sunk!') {
+                    playerSquare.classList.add('player-hit');
+                } else if (results.attackResult === 'Miss!') {
+                    playerSquare.classList.add('miss')
+                }
+
+            }, 0);
         })
     }
 
